@@ -158,7 +158,7 @@ function CryptoDetails() {
           <tbody>
             {trade.map((item,index) => index < 21 && (
               <tr key={index} className="border border-x-0 border-t-0">
-                <td className="text-center text-[10px] md:text-[14px] py-2 md:py-4">{index}</td>
+                <td className="text-center text-[10px] md:text-[14px] py-2 md:py-4">{index+1}</td>
                 <td className="text-center text-[10px] md:text-[14px] py-2 md:py-4">{item?.base}</td>
                 <td className="text-center text-[10px] md:text-[14px] py-2 md:py-4">{item?.target}</td>
                 <td className="text-center text-[10px] md:text-[14px] py-2 md:py-4">{millify(item?.last)}</td>
