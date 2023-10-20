@@ -11,6 +11,7 @@ function Footer_fot() {
           <Link className='hover:underline underline-offset-4 text-blue-100' to='/'>Home</Link>
           <Link className='hover:underline underline-offset-4 text-blue-100' to='/cryptocurrencies'>Crypto</Link>
           <Link className='hover:underline underline-offset-4 text-blue-100' to='/exchanges'>Exchyanges</Link>
+          <Link className='hover:underline underline-offset-4 text-blue-100' to='/nfts'>NFT</Link>
           <Link className='hover:underline underline-offset-4 text-blue-100' to='/news'>News</Link>
         </div>
       </div>
