@@ -29,24 +29,24 @@ function CoinTable() {
   /* console.log(coins) */
 
   return (
-    <div className='grid grid-cols-3 mt-8 md:mt-32'>
+    <div className='grid md:grid-cols-2 lg:grid-cols-3 mt-16 md:mt-32'>
       {coins.map((items,index) => {
         let profit = items.price_change_percentage_24h >= 0;
         return index < 21 && (
-          <Card className="mt-6 w-96" key={items.id}>
+          <Card className="mt-6 md:w-[340px] lg:w-[300px] xl:w-96" key={items.id}>
             <CardBody>
               <div className='flex justify-between'>
                 <div className='flex gap-2 mb-2'>
-                  <img src={items?.image} alt="img" className='w-10' />
-                  <Typography variant="h5" color="blue-gray" className="mt-2 capitalize">
+                  <img src={items?.image} alt="img" className='w-7 h-7 md:w-10 md:h-10' />
+                  <Typography variant="h5" color="blue-gray" className="capitalize text-[16px] md:text-lg md:mt-2">
                     {items?.id}
                   </Typography>
-                  <Typography variant="h6" color="blue-gray" className="mt-2 uppercase text-gray-500">
+                  <Typography variant="h6" color="blue-gray" className="uppercase text-gray-500 text-[16px] md:text-lg md:mt-2">
                     {items?.symbol}
                   </Typography>
                 </div>
                 <div>
-                  <Typography variant="h6" color="blue-gray" className="mt-2 uppercase text-gray-500"
+                  <Typography variant="h6" color="blue-gray" className="uppercase text-gray-500 text-[16px] md:text-lg md:mt-2"
                     style={{color: profit > 0 ? "rgb(14, 203, 129)" : "red"}} 
                   >
                     {profit && '+'}{millify(items.price_change_percentage_24h)} % 
@@ -55,18 +55,18 @@ function CoinTable() {
               </div>
               <div className='flex justify-between'>
                 <div>
-                  <Typography variant="h6" className="mt-2 ml-4 text-gray-600 text-[14px]">
+                  <Typography variant="h6" className="ml-4 text-gray-600 text-[12px] md:text-[14px] md:mt-2">
                     <span className='capitalize text-blue-gray-900'>current price: </span>{millify(items?.current_price)}
                   </Typography>
-                  <Typography variant="h6" className="mt-2 ml-4 text-gray-600 text-[14px]">
+                  <Typography variant="h6" className="ml-4 text-gray-600 text-[12px] md:text-[14px] md:mt-2">
                     <span className='capitalize text-blue-gray-900'>volume: </span>{millify(items?.total_volume)}
                   </Typography>
                 </div>
                 <div>
-                  <Typography variant="h6" className="mt-2 ml-4 text-gray-600 text-[14px]">
+                  <Typography variant="h6" className="ml-4 text-gray-600 text-[12px] md:text-[14px] md:mt-2">
                     <span className='capitalize text-blue-gray-900'>24h High: </span>{millify(items?.high_24h)}
                   </Typography>
-                  <Typography variant="h6" className="mt-2 ml-4 text-gray-600 text-[14px]">
+                  <Typography variant="h6" className="ml-4 text-gray-600 text-[12px] md:text-[14px] md:mt-2">
                     <span className='capitalize text-blue-gray-900'>24h Low: </span>{millify(items?.low_24h)}
                   </Typography>
                 </div>

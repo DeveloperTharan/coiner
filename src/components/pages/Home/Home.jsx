@@ -8,7 +8,7 @@ function Home() {
 
   return (
     <div className='bg-gray-50'>
-      <div className='container md:mx-auto'>
+      <div className='container mx-auto'>
         <TrendingCoins />
         <CoinTable /> 
         <TopNews />

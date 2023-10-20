@@ -33,7 +33,10 @@ function NFT() {
     /* console.log(nftTokens); */
 
   return (
-    <div className='container mx-auto mt-20 grid xs:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-7'>
+    <div>
+      <h1 className='text-3xl font-bold text-center mt-16'>Top NFT's</h1>
+      <p className='text-[14px] text-gray-600 text-center lg:w-[30%] mx-auto mt-2'>The NFT's are non-funchable tokens that are unique and non-replacable and also it is new and growing asset's</p>
+      <div className='container mx-auto grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {nftTokens.map((items,index) => (
             <div key={items.id}>
                 <NFTItems
@@ -41,6 +44,7 @@ function NFT() {
                 />
             </div>
         ))}
+      </div>
     </div>
   )
 }
