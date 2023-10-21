@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import millify from 'millify';
 import { Link } from 'react-router-dom';
+import { ArrowDownTrayIcon, MagnifyingGlassIcon, } from "@heroicons/react/24/outline";
+import {Card, CardHeader, Typography, Button, CardBody, Chip, CardFooter, Avatar, IconButton, Tooltip, Input, } from "@material-tailwind/react";
 
 const CoinsList = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false';
 
@@ -12,9 +14,7 @@ function CryptoCurrencies() {
 
   useEffect(() => {
     fetchCoinsList();
-    /* const filterCoin = coins?.filter((Fcoin) => Fcoin.name.toLowerCase().includes(searchcoin.toLowerCase()));
-    setCoins(filterCoin); */
-  },[/* searchcoin */]);
+  },[]);
 
   const fetchCoinsList = () => {
     axios.get(CoinsList).then((resp) => {
@@ -31,58 +31,137 @@ function CryptoCurrencies() {
   }
 
   return (
-    <div className='mt-16 md:container md:mx-4'>
+    <div className='mt-16 container mx-auto'>
       <div className='mb-5'>
-        <h3 className='text-lg md:text-2xl xl:text-[2.5rem] font-semibold text-center'>Cryptocurrency Prices by Market Cap</h3>
-        <p className='mt-1 xl:mt-2 text-[10px] md:text-[14px] xl:text-[22px] text-gray-500 text-center'>The global cryptocurrency market cap today is $1.11 Trillion, a 2.1% change in the last 24 hours.</p>
+        <Card className="h-full w-full">
+          <CardHeader floated={false} shadow={false} className="rounded-none">
+            <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
+              <div>
+                <Typography variant="h5" color="blue-gray">
+                  All CryptoCurrencies
+                </Typography>
+                <Typography color="gray" className="mt-1 font-normal">
+                  These are details about the all CryptoCurrencies
+                </Typography>
+              </div>
+              <div className="flex w-full shrink-0 gap-2 md:w-max">
+                <div className="w-full md:w-72">
+                  <Input
+                    label="Search"
+                    icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                    onChange={(e) => setSearchcoin(e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+          </CardHeader>
+          <CardBody className="overflow-scroll px-0">
+            <table className="w-full min-w-max table-auto text-left">
+              <thead>
+                <tr>
+                  <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal leading-none opacity-70"
+                    >
+                      #
+                    </Typography>
+                  </th>
+                  <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal leading-none opacity-70"
+                    >
+                      Coins
+                    </Typography>
+                  </th>
+                  <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal leading-none opacity-70"
+                    >
+                      Price
+                    </Typography>
+                  </th>
+                  <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal leading-none opacity-70"
+                    >
+                      24h
+                    </Typography>
+                  </th>
+                  <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal leading-none opacity-70"
+                    >
+                      24h Volume
+                    </Typography>
+                  </th>
+                  <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal leading-none opacity-70"
+                    >
+                      MKT Cap
+                    </Typography>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {handelSearh().map((items,index) => {
+                let profit = items.price_change_percentage_24h >= 0;
+                
+                return(
+                  <tr key={index} className='border border-x-0 border-t-0'>
+                    <td className='p-4 border-b border-blue-gray-50'>{items.market_cap_rank}</td>
+                    <td className='p-4 border-b border-blue-gray-50'>
+                      <Link to={`/crypto/${items.id}`} className='flex justify-start items-start gap-1 md:gap-4'>
+                      <Avatar
+                          src={items.image}
+                          alt='img'
+                          size="md"
+                          className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                        />
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-bold mt-3"
+                        >
+                          {items.name}
+                        </Typography>
+                        <Typography
+                          variant="small"
+                          className="font-bold text-gray-400 mt-3"
+                        >
+                          {items.symbol}
+                        </Typography> 
+                      </Link>
+                    </td>
+                    <td className='p-4 border-b border-blue-gray-50'>$ {millify(items.current_price)}</td>
+                    <td 
+                      
+                      style={{color: profit > 0 ? "rgb(14, 203, 129)" : "red"}} 
+                    >
+                      {profit && '+'}{millify(items.price_change_percentage_24h)} % 
+                    </td>
+                    <td className='p-4 border-b border-blue-gray-50'>$ {millify(items.total_volume)}</td>
+                    <td className='p-4 border-b border-blue-gray-50'>$ {millify(items.market_cap)}</td>
+                  </tr>
+                )
+                })}
+              </tbody>
+            </table>
+          </CardBody>
+        </Card>
       </div>
-      <div className='my-5'>
-        <input 
-          type="text" 
-          placeholder='Search crypto currency...' 
-          className='w-full text-center border py-2 px-4 outline-none rounded-md' 
-          onChange={(e) => setSearchcoin(e.target.value)}
-        />
-      </div>
-      <table className='table w-full'>
-          <thead className='border border-x-0'>
-            <tr>
-              <th className='text-gray-600 py-2 md:py-4 text-[10px] md:text-[16px]'>#</th>
-              <th className='text-gray-600 py-2 md:py-4 text-[10px] md:text-[16px]'>Coins</th>
-              <th className='text-gray-600 py-2 md:py-4 text-[10px] md:text-[16px]'>Price</th>
-              <th className='text-gray-600 py-2 md:py-4 text-[10px] md:text-[16px]'>24h</th>
-              <th className='text-gray-600 py-2 md:py-4 text-[10px] md:text-[16px]'>24h Volume</th>
-              <th className='text-gray-600 py-2 md:py-4 text-[10px] md:text-[16px]'>MKT Cap</th>
-            </tr>  
-          </thead>
-          <tbody>
-            {handelSearh().map((items,index) => {
-              let profit = items.price_change_percentage_24h >= 0;
-              
-              return(
-                <tr key={index} className='border border-x-0 border-t-0'>
-                <td className='text-center text-[10px] md:text-[14px] py-2 md:py-4'>{items.market_cap_rank}</td>
-                <td className='py-2 md:py-4'>
-                  <Link to={`/crypto/${items.id}`} className='flex justify-start items-start gap-1 md:gap-4'>
-                    <img src={items.image} alt="img" className='w-4 md:w-6' /> 
-                    <span className='text-[10px] md:text-[14px]' >{items.name}</span> 
-                    <span className='text-[10px] md:text-[14px] text-gray-400' >{items.symbol}</span> 
-                  </Link>
-                </td>
-                <td className='text-center text-[10px] md:text-[14px] py-2 md:py-4'>$ {millify(items.current_price)}</td>
-                <td 
-                  className='text-center text-[10px] md:text-[14px] py-2 md:py-4' 
-                  style={{color: profit > 0 ? "rgb(14, 203, 129)" : "red"}} 
-                >
-                  {profit && '+'}{millify(items.price_change_percentage_24h)} % 
-                </td>
-                <td className='text-center text-[10px] md:text-[14px] py-2 md:py-4'>$ {millify(items.total_volume)}</td>
-                <td className='text-center text-[10px] md:text-[14px] py-2 md:py-4'>$ {millify(items.market_cap)}</td>
-              </tr>
-              )
-            })}
-          </tbody>
-        </table>
     </div>
   )
 }
