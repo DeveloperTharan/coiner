@@ -118,7 +118,7 @@ function CryptoDetails() {
             </div>
           </div>
         </div>
-        <div className="xs:mt-2 lg:mt-40">
+        <div className="mt-2 lg:mt-40">
           <h3 className="text-xl font-semibold mb-3 xl:mb-0">Info</h3>
           <div className="mt-3 flex justify-between gap-12">
             <h3 className="text-gray-500 text-[14px]">Home Page</h3>
