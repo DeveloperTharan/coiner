@@ -45,8 +45,8 @@ function News() {
       <div className='mt-5'>
           {news.map((items,index) => (
             <div key={index}>
-              <div className='border border-gray-400 rounded-md px-6 py-6 my-10 flex gap-10'>
-                <img src={img} alt="img" className='w-40' />
+              <div className='border border-gray-400 rounded-md px-6 py-6 my-10 flex gap-10 justify-items-center items-center'>
+                <img src={img} alt="img" className='w-20 h-20 xl:w-40 xl:h-40' />
                 <div>
                   <h3 className='text-md font-semibold'>{items?.source}</h3>
                   <p className='text-xs'>{items?.title}</p>

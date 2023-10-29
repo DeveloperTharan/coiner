@@ -29,7 +29,7 @@ function CoinTable() {
   /* console.log(coins) */
 
   return (
-    <div className='grid md:grid-cols-2 lg:grid-cols-3 mt-16 md:mt-32'>
+    <div className='grid md:grid-cols-2 lg:grid-cols-3 mt-20 md:mt-32'>
       {coins.map((items,index) => {
         let profit = items.price_change_percentage_24h >= 0;
         return index < 21 && (
